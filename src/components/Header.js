@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/header.css'
+import '../styles/header.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faVideo, faMagnifyingGlass, faBars} from '@fortawesome/free-solid-svg-icons'
@@ -7,16 +7,16 @@ import {faVideo, faMagnifyingGlass, faBars} from '@fortawesome/free-solid-svg-ic
 function Header(){
     return(
         <nav className="navBar">
-            <div className="navContainer">
-                <div className="iconMenu">
-                    <FontAwesomeIcon icon={faBars} />
-                </div>
-                <div className="logo">
-                    <a href="/">
-                        <FontAwesomeIcon icon={faVideo} style={{color: "#ffffff"}} className="iconLogo" />
-                        <h2 className="textoLogo">MovieMania</h2>
-                    </a>
-                </div>
+            <div className="iconMenu">
+                <FontAwesomeIcon icon={faBars} />
+            </div>
+            <div className="logo">
+                <a href="/">
+                    <FontAwesomeIcon icon={faVideo} style={{color: "#ffffff"}} className="iconLogo" />
+                    <h1 className="textoLogo">MovieMania</h1>
+                </a>
+            </div>
+            <div className='rightSection'>
                 <div className="lupa">
                     <a href="/">
                         <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff"}} />

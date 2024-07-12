@@ -1,0 +1,79 @@
+@import 'variables.scss';
+@import 'reset.scss';
+
+.navBar {
+    background-color: $primary-color;
+    color: white;
+
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 8rem 1rem 4em;
+
+    div {
+        // border: red solid 1px;
+    }
+}
+
+.iconMenu, .lupa, .login {
+    display: flex;
+    align-items: center;
+}
+
+.iconMenu {
+    cursor: pointer;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+    }
+
+    .iconLogo {
+        margin-right: 15px;
+        font-size: 30px;
+    }
+}
+
+.rightSection {
+    color: white;
+
+    display: flex;
+    align-items: center;
+
+    .lupa a{
+        text-decoration: none;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+//tamanho dos iscones
+.lupa a, .iconMenu {
+    font-size: 25px;
+}
+
+//botao login
+.login a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 1px solid white;
+    border-radius: 4px;
+    transition: backgroound-color 0.3s, color 0.3s;
+
+    &:hover {
+        background-color: white;
+        color: $primary-color;
+    }
+}
