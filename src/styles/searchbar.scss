@@ -1,0 +1,36 @@
+@import '_variables.scss';
+@import '_reset.scss';
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 25px;
+    padding: 5px 10px;
+    width: 250px;
+}
+
+.searchInput{
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 25px;
+    width: 200px;
+}
+
+.searchButton{
+    background: none;
+    border: none;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.searchIcon{
+    color: $primary-color;
+    width: 20px;
+    height: 20px;
+}
+
+.searchContainer:focus-within, .searchContainer:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
