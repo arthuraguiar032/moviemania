@@ -1,13 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/header.scss'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faVideo, faMagnifyingGlass, faBars} from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {faVideo, faMagnifyingGlass, faBars} from '@fortawesome/free-solid-svg-icons'
 
 function Header(){
     return(
         <nav className="navBar">
-            <div className="iconMenu">
+            <Link to="/">Home</Link>
+            <Link to="/movie">Movie</Link>
+            <Link to="/artist">Artist</Link>
+
+            
+
+            {/* <div className="iconMenu">
                 <FontAwesomeIcon icon={faBars} />
             </div>
             <div className="logo">
@@ -25,7 +32,7 @@ function Header(){
                 <div className="login">
                     <a href="/login">Login</a>
                 </div>
-            </div>
+            </div> */}
         </nav>
 
     );
