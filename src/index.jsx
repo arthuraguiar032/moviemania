@@ -18,7 +18,7 @@ root.render(
         <Route path="/" element={<App />}> 
           <Route path='/' element={<HomeView />} />
           <Route path='artist' element={<ArtistView />} />
-          <Route path='movie' element={<MovieView />} />
+          <Route path='movie/:id' element={<MovieView />} />
         </Route>
       </Routes> 
     </BrowserRouter>

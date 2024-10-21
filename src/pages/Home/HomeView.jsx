@@ -5,7 +5,6 @@ const HomeView = () => {
   return (
     <>
       <h1>Home</h1>
-      <RatingBar rating={80} diameter={100} />
     </>
     
   )
