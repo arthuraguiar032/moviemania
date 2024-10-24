@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/moviecontent.scss'
 
-function MovieContent() {
+function MovieContent({id}) {
   return (
     <>
         <div className="imageMovie">

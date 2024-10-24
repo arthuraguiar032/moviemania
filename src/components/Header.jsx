@@ -1,11 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
 import '../styles/header.scss'
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {faVideo, faMagnifyingGlass, faBars} from '@fortawesome/free-solid-svg-icons'
+import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 
 function Header(){
+
+    const [search, setSearch] = useState('');
+    const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(search);
+
+        if (!search) return;
+
+        navigate(`/search?q=${search}`);
+        setSearch('');
+    };
+
+
     return(
         <nav className="navBar">
             <Link to="/">Home</Link>
@@ -22,17 +40,28 @@ function Header(){
                     <FontAwesomeIcon icon={faVideo} style={{color: "#ffffff"}} className="iconLogo" />
                     <h1 className="textoLogo">MovieMania</h1>
                 </a>
-            </div>
+            </div> */}
             <div className='rightSection'>
                 <div className="lupa">
-                    <a href="/">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#ffffff"}} />
-                    </a>
+                    {/* <a href="/">
+                        
+                    </a> */}
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            placeholder='Busque um filme'
+                            onChange={(e) => setSearch(e.target.value)}
+                            value={search}
+                        />
+                        <button type='submit'>
+                            <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#000000"}} />
+                        </button>
+                    </form>
                 </div>
-                <div className="login">
+                {/* <div className="login">
                     <a href="/login">Login</a>
-                </div>
-            </div> */}
+                </div> */}
+            </div>
         </nav>
 
     );
