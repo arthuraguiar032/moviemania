@@ -30,7 +30,7 @@ const SearchView = () => {
   };
 
   useEffect(() => {
-    const searchUrl = searchUrlBase + "?query=" + query + "&include_adult=true&language=pt-BR&page=1";
+    const searchUrl = searchUrlBase + "?query=" + encodeURIComponent(query) + "&include_adult=true&language=pt-BR&page=1";
     
     const options = {
         method: 'GET',

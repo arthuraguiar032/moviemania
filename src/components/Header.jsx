@@ -15,14 +15,17 @@ function Header(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(search);
-
+    
         if (!search) return;
+    
+        // Usa encodeURIComponent para codificar corretamente os espaços e outros caracteres especiais
+        const encodedSearch = encodeURIComponent(search);
+        console.log(encodedSearch);
 
-        navigate(`/search?q=${search}`);
+        // Redireciona usando a URL codificada manualmente
+        navigate(`/search?q=${encodedSearch}`, { replace: true });
         setSearch('');
     };
-
 
     return(
         <nav className="navBar">
