@@ -1,6 +1,6 @@
 // Configuração base da Api do TMDB
 
-const BASE_URL = process.env.REACT_APP_API;
+const BASE_URL = process.env.REACT_APP_API_BASE ;
 const API_KEY = process.env.REACT_APP_API_KEY_ACCESS;
 
 //configuração padrao

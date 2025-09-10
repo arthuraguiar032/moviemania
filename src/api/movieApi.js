@@ -2,7 +2,7 @@ import { fetchFromApi, buildQueryString } from './tmdbApi';
 
 export const movieApi = {
   // Buscar detalhes de um filme específico
-  getMovieDetails: (id, language = 'pt-BR') => {
+  getMovie: (id, language = 'pt-BR') => {
     const queryParams = buildQueryString({ language });
     return fetchFromApi(`/movie/${id}?${queryParams}`);
   },

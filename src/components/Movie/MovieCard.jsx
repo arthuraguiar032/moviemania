@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import RatingBar from './RatingBar';
+import RatingBar from '../UI/RatingBar';
 
 const imageUrl = process.env.REACT_APP_IMG;
 
@@ -17,4 +17,4 @@ const MovieCard = ({movie, showLink = true}) => {
   )
 }
 
-export default MovieCard
+export default MovieCard;

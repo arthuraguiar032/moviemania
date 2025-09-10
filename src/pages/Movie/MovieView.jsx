@@ -1,55 +1,24 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import {useParams} from 'react-router-dom'
-
-import MovieDetails from '../../components/MovieDetails'
-
-const movieUrl = process.env.REACT_APP_API;
-const apiKey = process.env.REACT_APP_API_KEY_ACCESS;
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import useApi from '../../hooks/useApi';
+import { movieApi } from '../../api/movieApi'; // Verifique o caminho de importação
+import MovieDetails from '../../components/Movie/MovieDetails';
+// import LoadingSpinner from '../../components/UI/LoadingSpinner';
 
 const MovieView = () => {
-  const {id} = useParams();
-  const [movie, setMovie] = useState(null);
+  const { id } = useParams();
+  
+  // Use useApi passando a função e os parâmetros corretos
+  const { data: movie, loading, error } = useApi(movieApi.getMovie, [id, 'pt-BR']);
 
-  const getMovie = async (url, options) => {
-    try {
-      const response = await fetch(url, options);
-
-      // Verifica se a requisição foi bem-sucedida
-      if (!response.ok) {
-        throw new Error(`Erro: ${response.status} - ${response.statusText}`);
-      }
-      const data = await response.json();
-      setMovie(data);
-
-    } catch (error) {
-      console.error("Erro ao buscar filme:", error);
-      return null; // Retorna null em caso de erro
-    }
-  };
-
-  useEffect(() => {
-    const movieURL = `${movieUrl}${id}?language=pt-BR`;
-
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer ' + apiKey}
-    };
-
-    getMovie(movieURL, options);
-  }, [id]);
-
+  if (loading) return  <> Carregando... </>;
+  if (error) return <div>Erro ao carregar filme: {error}</div>;
 
   return (
-    <div>MovieView
-
-      {movie ? <MovieDetails movie={movie} /> : <p>Carregando...</p>}
-      
-
+    <div className="movie-view">
+      {movie && <MovieDetails movie={movie} />}
     </div>
-  )
-}
+  );
+};
 
 export default MovieView;

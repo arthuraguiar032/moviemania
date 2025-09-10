@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import  MovieCard  from '../../components/MovieCard'
+import  MovieCard  from '../../components/Movie/MovieCard'
 
 const searchUrlBase = process.env.REACT_APP_SEARCH
 const apiKey = process.env.REACT_APP_API_KEY_ACCESS

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import '../styles/header.scss'
+import '../../styles/header.scss'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {faVideo, faMagnifyingGlass, faBars} from '@fortawesome/free-solid-svg-icons'

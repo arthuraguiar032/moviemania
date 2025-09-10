@@ -1,5 +1,5 @@
 import React from "react";
-import '../styles/moviecontent.scss'
+import '../../styles/moviecontent.scss'
 
 function MovieContent({movie}) {
   return (
