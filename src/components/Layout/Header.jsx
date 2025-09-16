@@ -1,72 +1,57 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import styles from './Header.module.css';
+import SearchBar from '../UI/SearchBar/SearchBar';
 
-import '../../styles/header.scss'
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {faVideo, faMagnifyingGlass, faBars} from '@fortawesome/free-solid-svg-icons'
-import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
-
-function Header(){
-
-    const [search, setSearch] = useState('');
-    const navigate = useNavigate();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
+function Header() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     
-        if (!search) return;
-    
-        // Usa encodeURIComponent para codificar corretamente os espaços e outros caracteres especiais
-        const encodedSearch = encodeURIComponent(search);
-        console.log(encodedSearch);
-
-        // Redireciona usando a URL codificada manualmente
-        navigate(`/search?q=${encodedSearch}`, { replace: true });
-        setSearch('');
+    const handleSearch = (searchTerm) => {
+        if (!searchTerm) return;
+        const encodedSearch = encodeURIComponent(searchTerm);
+        window.location.href = `/search?q=${encodedSearch}`;
     };
 
-    return(
-        <nav className="navBar">
-            <Link to="/">Home</Link>
-            <Link to="/movie">Movie</Link>
-            <Link to="/artist">Artist</Link>
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
 
-            
-
-            {/* <div className="iconMenu">
-                <FontAwesomeIcon icon={faBars} />
-            </div>
-            <div className="logo">
-                <a href="/">
-                    <FontAwesomeIcon icon={faVideo} style={{color: "#ffffff"}} className="iconLogo" />
-                    <h1 className="textoLogo">MovieMania</h1>
-                </a>
-            </div> */}
-            <div className='rightSection'>
-                <div className="lupa">
-                    {/* <a href="/">
-                        
-                    </a> */}
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            placeholder='Busque um filme'
-                            onChange={(e) => setSearch(e.target.value)}
-                            value={search}
-                        />
-                        <button type='submit'>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#000000"}} />
-                        </button>
-                    </form>
+    return (
+        <header className={styles.header}>
+            <nav className={styles.navBar}>
+                <div className={styles.logo}>
+                    <Link to="/">
+                        <span className={styles.logoIcon}>🎬</span>
+                        <span className={styles.logoText}>MovieMania</span>
+                    </Link>
                 </div>
-                {/* <div className="login">
-                    <a href="/login">Login</a>
-                </div> */}
-            </div>
-        </nav>
 
+                <div className={`${styles.navLinks} ${isMenuOpen ? styles.navOpen : ''}`}>
+                    <Link to="/" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Home</Link>
+                    <Link to="/movie/popular" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Filmes</Link>
+                    <Link to="/artist" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Atores</Link>
+                    <Link to="/movie/top_rated" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Top Filmes</Link>
+                    <Link to="/movie/upcoming" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Em Breve</Link>
+                </div>
+
+                <div className={styles.rightSection}>
+                    <SearchBar 
+                        placeholder="Busque um filme..."
+                        onSearch={handleSearch}
+                    />
+                    
+                    <button 
+                        className={styles.menuButton}
+                        onClick={toggleMenu}
+                        aria-label="Abrir menu"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </header>
     );
 }
 

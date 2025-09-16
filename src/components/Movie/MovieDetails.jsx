@@ -1,5 +1,4 @@
 import React from "react";
-import '../../styles/moviecontent.scss'
 import useApi from '../../hooks/useApi';
 import { movieApi } from '../../api/movieApi';
 import { TmdbImage } from "../../utils/imageUtils";

@@ -1,0 +1,66 @@
+.searchContainer {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 25px;
+    padding: 5px 15px;
+    width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+}
+
+.searchInput {
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 25px;
+    width: 100%;
+    font-size: 16px;
+    background: transparent;
+}
+
+.searchInput::placeholder {
+    color: #999;
+}
+
+.searchButton {
+    background: none;
+    border: none;
+    padding: 0 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchIcon {
+    color: var(--primary-color, #1c1c1c);
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+}
+
+/* Efeitos de foco e hover */
+.searchContainer:focus-within, 
+.searchContainer:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-color, #1c1c1c);
+    width: 350px;
+}
+
+.searchContainer:focus-within .searchIcon {
+    transform: scale(1.1);
+}
+
+/* Para dispositivos móveis */
+@media (max-width: 768px) {
+    .searchContainer {
+        width: 200px;
+    }
+    
+    .searchContainer:focus-within, 
+    .searchContainer:hover {
+        width: 250px;
+    }
+}

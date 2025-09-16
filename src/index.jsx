@@ -4,6 +4,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import App from './App';
+import './styles/globals.css'
+
 import HomeView from './pages/Home/HomeView'; 
 import ArtistView from './pages/Artist/ArtistView';
 import MovieView from './pages/Movie/MovieView';
