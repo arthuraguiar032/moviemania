@@ -2,8 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import useApi from '../../hooks/useApi';
 import { movieApi } from '../../api/movieApi'; // Verifique o caminho de importação
-import MovieDetails from '../../components/Movie/MovieDetails';
-// import LoadingSpinner from '../../components/UI/LoadingSpinner';
+import {MovieDetails} from '../../components/Movie/MovieDetails';
 
 const MovieView = () => {
   const { id } = useParams();

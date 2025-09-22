@@ -1,7 +1,7 @@
 import React from 'react';
 import useApi from '../../hooks/useApi';
 import { movieApi } from '../../api/movieApi';
-import MovieCard from '../../components/Movie/MovieCard';
+import MovieCard from '../../components/Movie/MovieCard/MovieCard';
 
 const HomeView = () => {
   // Usando o hook useApi para buscar os filmes mais bem avaliados

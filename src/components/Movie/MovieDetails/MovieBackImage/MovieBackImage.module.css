@@ -1,0 +1,15 @@
+.movieBackimage {
+  width: 100vw;
+  height: 50vh; /* ou a altura que preferir */
+  position: relative;
+  overflow: hidden;
+  background-color: #1c1c1c; /* cor de fallback */
+}
+
+.movieBackimage img {
+    width: 100%;
+    height: 100%;
+  object-fit: cover; /* mantém a proporção e cobre toda a área */
+  object-position: auto; /* ajusta a posição da imagem */
+  display: block;
+}
