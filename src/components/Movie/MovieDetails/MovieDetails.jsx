@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './MovieDetails.module.css';
 
 import useApi from '../../../hooks/useApi';
 import { movieApi } from '../../../api/movieApi';
@@ -8,6 +9,7 @@ import {MovieCast} from './MovieCast';
 import {MovieCrew} from './MovieCrew';
 import {MovieInfo} from './MovieInfo';
 import { MovieBackImage } from './MovieBackImage';
+import {ContainerBox} from '../../UI/ContainerBox';
 
 // import MovieInfo from './MovieInfo/MovieInfo';
 
@@ -37,16 +39,20 @@ function MovieDetails({ movie }) {
   };
 
   return (
-    <div className="movieContainer">
-      <MovieBackImage 
+    <div className={styles.movieDetails}>
+      
+      <MovieBackImage
+        className={styles.backdropImage}
         path={movie.backdrop_path} 
         alt={`Foto de fundo do filme ${movie.title}`} 
       />
-      
-      <div className="movieContent">
+
+      <ContainerBox className={styles.containerInfoFilme}>
+         <div className="movieContent">
         <MovieHeader movie={movie} directorsContent={renderDiretores()} />
         
         <div className="secondary-sections">
+          
           <MovieCast 
             cast={movieCredits?.cast} 
             loading={creditsLoading} 
@@ -61,7 +67,11 @@ function MovieDetails({ movie }) {
           
           <MovieInfo movie={movie} />
         </div>
+
       </div>
+      </ContainerBox>
+      
+     
     </div>
   );
 }
