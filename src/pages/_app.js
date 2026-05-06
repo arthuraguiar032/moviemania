@@ -5,7 +5,7 @@ import MainContainer from "@/components/layout/MainContainer";
 export default function App({ Component, pageProps }) {
   return (
     <MainContainer>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </MainContainer>
   );
 }
