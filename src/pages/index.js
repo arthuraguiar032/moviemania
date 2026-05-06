@@ -7,7 +7,11 @@ const Home = () => {
   useEffect(() => {
     const testApi = async () => {
       try{
-        const movies = await movieListsService.getNowPlaying();
+        const movies = await movieListsService.getTopRated({
+          //opcional
+          language: 'pt-BR',
+          page: 1,
+        });
         console.log(movies);
       } catch (error) {
         console.log("ERRO AO ACESSAR A API", error)
