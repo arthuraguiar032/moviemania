@@ -1,7 +1,7 @@
-import Header from '@/components/Layout/Header';
-import Footer from "@/components/Layout/Footer";
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
-import styles from "@/styles/MainContainer.module.css";
+import styles from './MainContainer.module.css';
 
 const MainContainer = ({children}) => {
 
