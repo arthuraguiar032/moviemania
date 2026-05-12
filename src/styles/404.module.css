@@ -3,7 +3,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #14181c;
   padding: 2rem;
 }
 
@@ -21,7 +20,7 @@
 }
 
 .codeAccent {
-  color: #00e054;
+  color: var(--highlight-color);
 }
 
 .title {
@@ -34,7 +33,7 @@
 .subtitle {
   margin-top: 0.75rem;
   font-size: 1.25rem;
-  color: #d9d9d9;
+  color: var(--offwhite-color);
   font-weight: 300;
   line-height: 1.6;
 }
