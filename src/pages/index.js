@@ -1,29 +1,32 @@
 import styles from "@/styles/Home.module.css";
 import { useEffect } from "react";
 import { movieListsService } from "@/service/tmdb_movieLists";
+import LinkButton from '@/components/ui/LinkButton';
 
 const Home = () => {
 
-  useEffect(() => {
-    const testApi = async () => {
-      try{
-        const movies = await movieListsService.getTopRated({
-          //opcional
-          page: 1,
-        });
-        console.log(movies);
-      } catch (error) {
-        console.log("ERRO AO ACESSAR A API", error)
-      }
-    };
+  // useEffect(() => {
+  //   const testApi = async () => {
+  //     try{
+  //       const movies = await movieListsService.getTopRated({
+  //         //opcional
+  //         page: 1,
+  //       });
+  //       console.log(movies);
+  //     } catch (error) {
+  //       console.log("ERRO AO ACESSAR A API", error)
+  //     }
+  //   };
 
-    testApi();
-  }, []);
+  //   testApi();
+  // }, []);
 
   return (
     <>
       <h1>Aqui terão filmes</h1>
       <p>TESTANDO A API OLHA O CONSOLE MALDITO</p>
+
+      <LinkButton variant="primary" path="/">Enviar</LinkButton>
     </>
   );
 };
