@@ -9,7 +9,6 @@ const Home = () => {
       try{
         const movies = await movieListsService.getTopRated({
           //opcional
-          language: 'pt-BR',
           page: 1,
         });
         console.log(movies);
