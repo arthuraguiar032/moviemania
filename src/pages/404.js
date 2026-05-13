@@ -3,7 +3,7 @@ import LinkButton from "@/components/ui/LinkButton";
 import cn from 'classnames';
 
 const NotFound = () => (
-  <main className={styles.container}>
+  <div className={styles.container}>
     <div className={styles.content}>
       <div className={styles.code}>
         <span className={styles.codeAccent}>4</span>0
@@ -26,7 +26,7 @@ const NotFound = () => (
         </LinkButton>
       </div>
     </div>
-  </main>
+  </div>
 );
 
 export default NotFound;
