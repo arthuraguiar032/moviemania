@@ -26,7 +26,6 @@ const Home = () => {
       <h1>Aqui terão filmes</h1>
       <p>TESTANDO A API OLHA O CONSOLE MALDITO</p>
 
-      <LinkButton variant="primary" path="/">Enviar</LinkButton>
     </>
   );
 };
