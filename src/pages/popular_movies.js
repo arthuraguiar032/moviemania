@@ -5,6 +5,9 @@ import TmdbImage from "@/components/ui/TmdbImage";
 import { useEffect, useState } from "react";
 import mockData from '@/mock/popular_movies.json'
 
+import styles from '@/styles/popular_movies.module.css';
+import Link from "next/link";
+
 
 const PopularMovies = () => {
   
@@ -39,21 +42,32 @@ const PopularMovies = () => {
     const truncate_date = (date) => date.slice(0, 4);
 
   return (
-    <div className="mainContainer">
-      <div className="head">
+    <div className={styles.resultsContainer}>
+      <div className={styles.heading}>
         <h1> Filmes Populares</h1>
+        <hr />
       </div>
-      <hr />
 
-      <div className="resultados">
-        {movies.map( movie => {
-            return (
-              <div className="movie" key={movie.id} style={{width: '200px'}}>
-                <TmdbImage path={movie.poster_path} size="lg" type="poster" alt={`Poster ${movie.title}`} width={1000} />
-                <p>Titulo: {movie.title}</p>
-                <p>Data: {truncate_date(movie.release_date)}</p>
+      <div className={styles.resultsMovies}>
+        {movies.map((movie) => {
+          return (
+            // TODO: adicionar rota dinamica
+            <Link href="/" key={movie.id}>
+              <div className={styles.movieCard} style={{ width: "200px" }}>
+                <div className={styles.moviePoster}>
+                  <TmdbImage
+                    path={movie.poster_path}
+                    size="lg"
+                    type="poster"
+                    alt={`Poster ${movie.title}`}
+                    width={1000}
+                  />
+                </div>
+                <strong>{movie.title}</strong>
+                <p>{`(${truncate_date(movie.release_date)})`}</p>
               </div>
-            );
+            </Link>
+          );
         })}
       </div>
 
