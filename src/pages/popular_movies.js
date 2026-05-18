@@ -7,39 +7,47 @@ import mockData from '@/mock/popular_movies.json'
 
 import styles from '@/styles/popular_movies.module.css';
 import Link from "next/link";
+import { movieListsService } from "@/service/tmdb_movieLists";
+import Pagination from "@/components/layout/Pagination";
 
+
+const MOVIES_PER_PAGE = 40;
 
 const PopularMovies = () => {
-  
-//   useEffect(() => {
-//     const testApi = async () => {
-//       try{
-//         const movies = await movieListsService.getPopularMovies({
-//           //opcional
-//           page: 1,
-//         });
-//         console.log(movies);
-//       } catch (error) {
-//         console.log("ERRO AO ACESSAR A API", error)
-//       }
-//     };
-
-//     testApi();
-//   }, []);
 
     const [movies, setMovies] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    useEffect(() => {
-        const mockApi = () => {
-            console.log(mockData.results);
-            setMovies(mockData.results);
-        };
-        
-        mockApi();
+    // const lastMovieIndex = currentPage * MOVIES_PER_PAGE;
+    // const firstMovieIndex = lastMovieIndex - MOVIES_PER_PAGE;
 
-    }, []);
+    const [totalResults, setTotalResults] = useState(1);
+  
+  useEffect(() => {
+    const testApi = async () => {
+
+      try{
+        //cada chamada a api retorna apenas 20 resultados, como quero 40 por pagina é preciso concatenar
+        const [page1, page2] = await Promise.all(
+          [
+          movieListsService.getPopularMovies( {page: currentPage } ),
+          movieListsService.getPopularMovies( {page: currentPage + 1 } ),
+        ]
+        );
+        setTotalResults(page1.total_results);
+        setMovies([...page1.results, ...page2.results])
+
+      } catch (error) {
+        console.log("ERRO AO ACESSAR A API", error);
+      }
+    };
+
+    testApi();
+  }, [currentPage]);
 
     const truncate_date = (date) => date.slice(0, 4);
+
+
 
   return (
     <div className={styles.resultsContainer}>
@@ -71,8 +79,15 @@ const PopularMovies = () => {
         })}
       </div>
 
-      <hr />
-      <div className="paginacao"></div>
+      <div className={styles.pages}>
+        <hr />
+        <Pagination
+          totalPosts={totalResults}
+          postsPerPage={MOVIES_PER_PAGE}
+          setPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
 };
