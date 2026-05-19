@@ -1,0 +1,58 @@
+.resultsContainer {
+    /* border: solid red 2px; */
+    margin: 20px 100px;
+}
+
+
+.heading hr {
+    border: none;
+    height: 2px;
+    background-color: var(--highlight-color);
+    border-radius: 4px;
+}
+
+
+/* fallback para firefox e navegadores sem suporte */
+.heading h1 {
+    line-height: 1.3;
+}
+
+/* aplica somente se o navegador tiver suporte para text-box-trim */
+@supports (text-box-trim: trim-both) or (text-box: trim-both cap alphabetic) {
+    .heading h1 {
+        text-box: trim-both cap alphabetic;
+        line-height: 1.5;
+        /* Restaura um line-height confortável */
+    }
+}
+
+.resultsMovies {
+    padding: 20px 10px;
+    /* border: solid red 1px; */
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+}
+
+.movieCard {
+    text-align: center;
+    font-size: medium;
+}
+
+.movieCard p {
+    font-weight: 100;
+}
+
+.moviePoster {
+    border-radius: 10px;
+    /* border: solid red 1px; */
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.moviePoster:hover {
+    opacity: 0.8;
+    outline: solid 2px var(--highlight-color);
+}

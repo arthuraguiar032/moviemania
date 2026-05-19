@@ -1,9 +1,6 @@
-// import styles from '@/styles/popular_movies.module.css';
-// import { movieListsService } from "@/service/tmdb_movieLists";
 import TmdbImage from "@/components/ui/TmdbImage";
 
 import { useEffect, useState } from "react";
-import mockData from '@/mock/popular_movies.json'
 
 import styles from '@/styles/popular_movies.module.css';
 import Link from "next/link";
