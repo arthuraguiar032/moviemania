@@ -58,7 +58,7 @@ const PopularMovies = () => {
           return (
             // TODO: adicionar rota dinamica
             <Link href="/" key={movie.id}>
-              <div className={styles.movieCard} style={{ width: "200px" }}>
+              <div className={styles.movieCard}  >
                 <div className={styles.moviePoster}>
                   <TmdbImage
                     path={movie.poster_path}

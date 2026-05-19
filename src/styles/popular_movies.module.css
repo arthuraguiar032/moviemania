@@ -39,6 +39,7 @@
 .movieCard {
     text-align: center;
     font-size:medium;
+    width: 200px;
 }
 
 .movieCard p{
