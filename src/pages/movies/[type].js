@@ -1,10 +1,9 @@
 import { movieListsService } from "@/service/tmdb_movieLists";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import styles from '@/styles/popular_movies.module.css';
-import Link from "next/link";
-import TmdbImage from "@/components/ui/TmdbImage";
+import styles from '@/styles/Movies.module.css';
 import Pagination from "@/components/layout/Pagination";
+import MovieGrid from "@/components/layout/MovieGrid";
 
 //mapeamento de quais paginas serao aceitas
 const PAGE_CONFIG = {
@@ -61,7 +60,6 @@ const MoviesType = () => {
       setCurrentPage(1);
     }, [type]);
 
-    const truncate_date = (date) => date.slice(0,4);
 
     if (type && !PAGE_CONFIG[type]) {
       router.push("/404");
@@ -76,28 +74,7 @@ const MoviesType = () => {
           <hr />
         </div>
 
-        <div className={styles.resultsMovies}>
-          {movies.map((movie) => {
-            return (
-              // TODO: adicionar rota dinamica
-              <Link href="/" key={movie.id}>
-                <div className={styles.movieCard}>
-                  <div className={styles.moviePoster}>
-                    <TmdbImage
-                      path={movie.poster_path}
-                      size="lg"
-                      type="poster"
-                      alt={`Poster ${movie.title}`}
-                      width={1000}
-                    />
-                  </div>
-                  <strong>{movie.title}</strong>
-                  <p>{`(${truncate_date(movie.release_date)})`}</p>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+        <MovieGrid movies={movies}/>
 
         <div className={styles.pages}>
           <hr />

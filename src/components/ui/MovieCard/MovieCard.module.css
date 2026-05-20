@@ -1,0 +1,22 @@
+.movieCard {
+    text-align: center;
+    font-size: medium;
+    width: 200px;
+    /* border: solid red 1px; */
+}
+
+.movieCard p {
+    font-weight: 100;
+}
+
+.moviePoster {
+    border-radius: 10px;
+    /* border: solid red 1px; */
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.moviePoster:hover {
+    opacity: 0.8;
+    outline: solid 2px var(--highlight-color);
+}
