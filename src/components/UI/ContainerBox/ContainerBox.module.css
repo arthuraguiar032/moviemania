@@ -1,9 +1,0 @@
-.containerBox {
-    padding: 20px 60px;
-    /* border: 1px solid red; */
-    border-radius: 10px;
-    background-color: var(--primary-color);
-    max-width: 80em;
-    margin-top: -15px;
-    z-index: 2;
-}

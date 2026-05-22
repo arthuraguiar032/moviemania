@@ -1,0 +1,47 @@
+.container {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.content {
+  text-align: center;
+  max-width: 600px;
+}
+
+.code {
+  font-size: clamp(120px, 20vw, 200px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -8px;
+}
+
+.codeAccent {
+  color: var(--highlight-color);
+}
+
+.title {
+  margin-top: 1.5rem;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  color: #fff;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin-top: 0.75rem;
+  font-size: 1.25rem;
+  color: var(--offwhite-color);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.actions {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}

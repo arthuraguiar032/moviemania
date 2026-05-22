@@ -1,0 +1,166 @@
+/* ─────────────────────────────────────────
+   Tokens from Figma
+   bg-surface : #1c1c1c
+   bg-base    : #14181c
+   green      : #00e054
+   text       : #d9d9d9
+   white      : #ffffff
+   ───────────────────────────────────────── */
+
+.header {
+    background-color: #1c1c1c;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 51px;
+    gap: 24px;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+}
+
+/* ── Hamburger ────────────────────────── */
+.menuButton {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menuButton span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* Animate to × when open */
+.menuOpen span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menuOpen span:nth-child(2) {
+    opacity: 0;
+}
+
+.menuOpen span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ── Logo ─────────────────────────────── */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.logoIcon {
+    width: 56px;
+    height: 49px;
+}
+
+.logoText {
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* ── Right section ────────────────────── */
+.rightSection {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* ── User icon ────────────────────────── */
+.userButton {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #d9d9d9;
+    background: #14181c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.userButton:hover {
+    border-color: #ffffff;
+}
+
+.userButton svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* ── Nav drawer (slides in from left) ─── */
+.navDrawer {
+    position: fixed;
+    top: 80px;
+    /* just below the header */
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    background: #1c1c1c;
+    border-right: 1px solid rgba(217, 217, 217, 0.08);
+    display: flex;
+    flex-direction: column;
+    padding: 40px 32px;
+    gap: 8px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 190;
+}
+
+.navDrawer.navOpen {
+    transform: translateX(0);
+}
+
+/* ── Nav links inside drawer ──────────── */
+.navLink {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #d9d9d9;
+    text-decoration: none;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.08);
+    transition: color 0.2s;
+}
+
+.navLink:last-child {
+    border-bottom: none;
+}
+
+.navLink:hover {
+    color: #00e054;
+}
+
+/* ── Backdrop ─────────────────────────── */
+.backdrop {
+    position: fixed;
+    inset: 0;
+    top: 80px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 180;
+}

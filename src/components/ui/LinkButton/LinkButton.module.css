@@ -1,0 +1,46 @@
+.btn {
+    border-radius: 0.5em;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.6em 1.6em;
+    cursor: pointer;
+    border: 2px solid transparent;
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+.sm {
+    font-size: 0.875rem;
+}
+
+.md {
+    font-size: 1rem;
+}
+
+.lg {
+    font-size: 1.25rem;
+}
+
+.btn:hover {
+    opacity: 0.88;
+}
+
+.primary {
+    background-color: var(--highlight-color);
+    color: var(--black-color);
+    box-shadow: 0 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.outline {
+    background-color: transparent;
+    color: var(--offwhite-color);
+    border-color: var(--gray-color);
+}
+
+.outline:hover {
+    opacity: 1;
+    border-color: var(--offwhite-color);
+    color: var(--white-color);
+}
