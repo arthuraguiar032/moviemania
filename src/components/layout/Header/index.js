@@ -2,14 +2,18 @@ import Link from "next/link";
 import { useState } from "react";
 import styles from "./Header.module.css";
 import SearchBar from "@/components/ui/SearchBar";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const router = useRouter();
+
   const handleSearch = (searchTerm) => {
     if (!searchTerm) return;
-    const encodedSearch = encodeURIComponent(searchTerm);
-    window.location.href = `/search?q=${encodedSearch}`;
+    const encodedSearch = encodeURIComponent(searchTerm).replaceAll("%20", "+");
+    // console.log(encodedSearch);
+    router.push(`/search?q=${encodedSearch}`);
   };
 
   const toggleMenu = () => {
@@ -50,7 +54,9 @@ const Header = () => {
 
         {/* Right — search + user */}
         <div className={styles.rightSection}>
+
           <SearchBar placeholder="Busque um filme..." onSearch={handleSearch} />
+
           <button className={styles.userButton} aria-label="Perfil">
             <svg
               viewBox="0 0 24 24"
@@ -77,28 +83,28 @@ const Header = () => {
           Home
         </Link>
         <Link
-          href="/movie/popular"
+          href="/movies/popular"
           className={styles.navLink}
           onClick={() => setIsMenuOpen(false)}
         >
-          Filmes
+          Filmes populares
         </Link>
         <Link
-          href="/artist"
+          href="/movies/now_playing"
           className={styles.navLink}
           onClick={() => setIsMenuOpen(false)}
         >
-          Atores
+          Nos cinemas
         </Link>
         <Link
-          href="/movie/top_rated"
+          href="/movies/top_rated"
           className={styles.navLink}
           onClick={() => setIsMenuOpen(false)}
         >
           Top Filmes
         </Link>
         <Link
-          href="/movie/upcoming"
+          href="/movies/upcoming"
           className={styles.navLink}
           onClick={() => setIsMenuOpen(false)}
         >
