@@ -7,9 +7,9 @@ const DEFAULT_PARAMS = {
   page: 1,
 };
 
-const movieRequest = async (endpoint, customParams) => {
-    console.log("DEFAULT_PARAMS atual:", { ...DEFAULT_PARAMS });
-    console.log("customParams recebido:", customParams);
+const movieListRequest = async (endpoint, customParams) => {
+    // console.log("DEFAULT_PARAMS atual:", { ...DEFAULT_PARAMS });
+    // console.log("customParams recebido:", customParams);
     
     const config = {
         params: {
@@ -19,8 +19,8 @@ const movieRequest = async (endpoint, customParams) => {
     };
     
 
-    console.log("URL:", `/movie${endpoint}`);
-    console.log("Params:", config.params);
+    // console.log("URL:", `/movie${endpoint}`);
+    // console.log("Params:", config.params);
 
     const response = await axiosInstance.get(`/movie${endpoint}`, config);
 
@@ -28,10 +28,10 @@ const movieRequest = async (endpoint, customParams) => {
 };
 
 export const movieListsService = {
-  getNowPlaying: (params = {}) => movieRequest("/now_playing", params),
-  getPopularMovies: (params = {}) => movieRequest("/popular", params),
-  getTopRated: (params = {}) => movieRequest("/top_rated", params),
-  getUpcoming: (params = {}) => movieRequest("/upcoming", params),
+  getNowPlaying: (params = {}) => movieListRequest("/now_playing", params),
+  getPopularMovies: (params = {}) => movieListRequest("/popular", params),
+  getTopRated: (params = {}) => movieListRequest("/top_rated", params),
+  getUpcoming: (params = {}) => movieListRequest("/upcoming", params),
 };
 
 
