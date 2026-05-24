@@ -8,9 +8,9 @@
   --highlight-color: #00E054;
 
   --font-primary: 'Helvetica', 'Arial', sans-serif;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 2rem;
+  --spacing-sm: 0.5em;
+  --spacing-md: 1em;
+  --spacing-lg: 2em;
   --border-radius: 4px;
 }
 
@@ -26,6 +26,11 @@ body {
   background-color: var(--secondary-color);
   color: var(--offwhite-color);
   line-height: 1.6;
+}
+
+main {
+  padding: 20px 100px;
+  min-height: 100vh;
 }
 
 a {

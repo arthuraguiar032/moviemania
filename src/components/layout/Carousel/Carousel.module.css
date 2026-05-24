@@ -1,0 +1,103 @@
+.contentCarousel {
+    position: relative;
+}
+
+.carousel {
+    padding: 0 10px;
+    margin: var(--spacing-sm) auto;
+    display: flex;
+    gap: var(--spacing-sm);
+    width: 100%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    color: var(--offwhite-color);
+    align-items: baseline;
+}
+
+.heading span {
+    font-size: medium;
+    color: var(--gray-color);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.heading span:hover{
+    color: var(--offwhite-color);
+}
+
+.card {
+    flex: 0 0 12em;
+    height: 22em;
+    padding: 1em;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: 0.5s;
+}
+
+.card:hover{
+    background-color: var(--primary-color);
+    color: var(--highlight-color);
+}
+
+
+.buttons{
+    border: none;
+    background-color: var(--highlight-color);
+    color: var(--offwhite-color);
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-100%);
+}
+
+.buttons:hover {
+    background-color: var(--secondary-color);
+    color: var(--highlight-color);
+    outline: solid 2px var(--highlight-color);
+}
+
+.buttons:disabled {
+    background-color: var(--primary-color);
+}
+
+.rightButton {
+    right: 0;
+}
+
+.arrowLeft,
+.arrowRight {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-top: 3px solid var(--offwhite-color);
+    border-right: 3px solid var(--offwhite-color);
+    border-radius: 2px;
+}
+
+.arrowRight {
+    transform: rotate(45deg);
+}
+
+.arrowLeft {
+    transform: rotate(-135deg);
+}

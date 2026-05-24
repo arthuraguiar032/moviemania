@@ -20,7 +20,7 @@ const TmdbImage = ({ path, size = "md", type = "poster", alt = "" }) => {
         src={imageUrl}
         alt={alt}
         fill
-        sizes={TAM_VISUAL}
+        sizes="(max-width: 768px) 160px, 200px"
         className={styles.image}
         loading="lazy"
       />
