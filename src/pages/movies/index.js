@@ -12,7 +12,7 @@ const Movies = () => {
 
       <Carousel
         title='Recomendações'
-        listLink='/'
+        listLink='/movies/popular'
         movies={movies}
       />
     
