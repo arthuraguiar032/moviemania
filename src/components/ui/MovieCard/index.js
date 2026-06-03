@@ -7,7 +7,7 @@ const MovieCard = ({movieId, movieTitle, posterPath, posterSize, releaseDate}) =
     const truncate_date = (date) => date.slice(0, 4);
 
     return (    
-        <Link href="/" key={movieId}>
+        <Link href={`/movie/${movieId}`}>
         <div className={styles.movieCard}>
             <div className={styles.moviePoster}>
             <TmdbImage

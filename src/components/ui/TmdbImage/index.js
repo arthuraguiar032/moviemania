@@ -5,7 +5,14 @@ import styles from './TmdbImage.module.css';
 //TODO: reconsiderar para responsividade
 const TAM_VISUAL= '200px';
 
-const TmdbImage = ({ path, size = "md", type = "poster", alt = "" }) => {
+const TmdbImage = ({ path, size = "md", type = "poster", alt = "", customSizes = null }) => {
+  const defaultSizes =
+    type === "backdrop"
+      ? "100vw" // backdrop ocupa largura total
+      : "(max-width: 768px) 300px, 400px"; // poster
+
+  const finalSizes = customSizes || defaultSizes;
+
   const imageUrl = buildImageUrl(path, size, type);
 
   if (!imageUrl) {
@@ -20,7 +27,7 @@ const TmdbImage = ({ path, size = "md", type = "poster", alt = "" }) => {
         src={imageUrl}
         alt={alt}
         fill
-        sizes="(max-width: 768px) 160px, 200px"
+        sizes={finalSizes}
         className={styles.image}
         loading="lazy"
       />

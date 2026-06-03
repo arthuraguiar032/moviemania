@@ -11,7 +11,7 @@ const Movies = () => {
       <p>Aqui terá a lista de vários filmes</p>
 
       <Carousel
-        title='Recomendações'
+        title='Filmes populares'
         listLink='/movies/popular'
         movies={movies}
       />
