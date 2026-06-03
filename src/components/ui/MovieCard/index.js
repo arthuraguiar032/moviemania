@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import TmdbImage from '../TmdbImage';
 import styles from './MovieCard.module.css';
+import truncate_date from '@/utils/movieFormatters';
 
 const MovieCard = ({movieId, movieTitle, posterPath, posterSize, releaseDate}) => {
     
-    const truncate_date = (date) => date.slice(0, 4);
-
     return (    
         <Link href={`/movie/${movieId}`}>
         <div className={styles.movieCard}>

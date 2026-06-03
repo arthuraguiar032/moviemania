@@ -8,15 +8,17 @@
 
 .list {
     display: flex;
-    gap: 2em;
+    justify-content: space-between;
+    align-items: center;
     list-style: none;
     padding: 0;
     margin: 0;
-    border-bottom: 1px solid rgba(217, 217, 217, 0.2);
+    border-bottom: 1px solid rgba(217, 217, 217, 0.2); /* aqui */
 }
 
 .list li {
-    padding-bottom: 0.6em;
+    /* remova o border-bottom e padding-bottom daqui */
+    text-align: center;
 }
 
 .button {
@@ -24,9 +26,9 @@
     border: none;
     cursor: pointer;
     font-family: var(--font-primary);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--white-color);
     padding: 0;
@@ -48,8 +50,7 @@
 .buttonActive::after {
     content: '';
     position: absolute;
-    bottom: -1px;
-    /* encosta no border-bottom do .list */
+    bottom: -1px;        /* encosta na borda da ul */
     left: 0;
     width: 100%;
     height: 2px;

@@ -36,12 +36,16 @@ const MoviesType = () => {
 
     // puxar filmes da api dependendo da rota e da pagina que vc esta
     useEffect(() => {
+      if (!type) return;
+
       const connectionApi = async () => {
         try {
           const [page1, page2] = await Promise.all([
             PAGE_CONFIG[type].fetchFn({ page: currentPage }),
             PAGE_CONFIG[type].fetchFn({ page: currentPage + 1}),
           ]);
+
+          console.log(page1, page2);
 
           setTotalResults(page1.total_results);
           setMovies([...page1.results, ...page2.results]);
@@ -57,9 +61,10 @@ const MoviesType = () => {
     // TODO: tornar essa atualização algo idiomatico em react, ES6 Lint esta reclamando
     //alterar pagina inicial ao mudar de rota e nao ficar preso na msm pagina
     useEffect(() => {
+      if (!type) return;
+
       setCurrentPage(1);
     }, [type]);
-
 
     if (type && !PAGE_CONFIG[type]) {
       router.push("/404");
@@ -78,12 +83,14 @@ const MoviesType = () => {
 
         <div className={styles.pages}>
           <hr />
-          <Pagination
+          {movies?.length > 0 &&
+            
+            <Pagination
             totalPosts={totalResults}
             postsPerPage={MOVIES_PER_PAGE}
             setPage={setCurrentPage}
             currentPage={currentPage}
-          />
+          />}
         </div>
       </div>
     );

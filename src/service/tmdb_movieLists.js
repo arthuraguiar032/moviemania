@@ -1,4 +1,4 @@
-import { axiosInstance, DEFAULT_PARAMS } from "./axios";
+import {axiosInstance, DEFAULT_PARAMS}  from "./axios";
 
 const movieListRequest = async (endpoint, customParams) => {
     // console.log("DEFAULT_PARAMS atual:", { ...DEFAULT_PARAMS });

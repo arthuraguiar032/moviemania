@@ -84,7 +84,18 @@ align-self: center;
 
 .topInfo span {
   color: #9c9c9c;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
+}
+
+.title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.topInfo .director {
+  font-size: 1.1rem;
+  line-height: 1rem;
 }
 
 .mainInfo {
@@ -94,6 +105,7 @@ align-self: center;
 }
 
 .tagline {
+  margin-top: 0.7rem;
   color: #00ff66;
   font-style: italic;
   font-size: 0.95rem;
@@ -138,6 +150,7 @@ align-self: center;
 
 .bottomSide {
   width: 100%;
+  padding: 2rem 5rem;
 }
 
 .lists {

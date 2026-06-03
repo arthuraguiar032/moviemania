@@ -33,6 +33,8 @@ const Home = () => {
         <Tab name={"Sec"}>Conteudo 2</Tab>
         <Tab name={"Terc"}>Conteudo 3</Tab>
         <Tab name={"Quart"}>Conteudo 4</Tab>
+        <Tab name={"Five"}>Conteudo 5</Tab>
+
       </Tabs>
     </>
   );
