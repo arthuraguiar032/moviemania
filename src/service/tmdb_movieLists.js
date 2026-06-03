@@ -1,11 +1,4 @@
-import axiosInstance from "./axios";
-
-// TODO: VIRAR CONTEXT DO PROJETO, USUARIO ESCOLHER REGIAO E LINGUA
-const DEFAULT_PARAMS = {
-  language: "en-US",
-  region: "US",
-  page: 1,
-};
+import { axiosInstance, DEFAULT_PARAMS } from "./axios";
 
 const movieListRequest = async (endpoint, customParams) => {
     // console.log("DEFAULT_PARAMS atual:", { ...DEFAULT_PARAMS });
