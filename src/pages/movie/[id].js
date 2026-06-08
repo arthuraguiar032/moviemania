@@ -5,7 +5,7 @@ import TmdbImage from "@/components/ui/TmdbImage";
 import styles from "./MoviePage.module.css";
 import Tabs from "@/components/layout/Tabs";
 import Tab from "@/components/layout/Tabs/Tab";
-import { truncateDecimal, truncate_date } from "@/utils/movieFormatters";
+import { truncate_decimal, truncate_date } from "@/utils/movieFormatters";
 
 const MoviePage = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const MoviePage = () => {
 });
   const directors_names = directors.map((person) => (person.name));
   const str_directors = directors_names.join(", ");
-  const rating = truncateDecimal(details.vote_average, 1);
+  const rating = truncate_decimal(details.vote_average, 1);
 
   const actors = credits.cast.map((actor) => (actor.name));
 
