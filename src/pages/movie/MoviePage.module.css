@@ -166,26 +166,3 @@ align-self: center;
 
   padding: 2rem;
 }
-
-.tagList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-sm);
-}
-
-.infoRow {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: var(--spacing-md);
-}
-
-.infoLabel {
-  width: 180px;
-  flex-shrink: 0;
-  color: var(--offwhite-color);
-}
-
-.textList{
-  display: block;
-  line-height: 1.5;
-}

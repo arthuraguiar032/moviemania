@@ -1,0 +1,15 @@
+.infoRow {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-md);
+}
+
+.infoLabel {
+    width: 180px;
+    flex-shrink: 0;
+    color: var(--offwhite-color);
+}
+
+.textList {
+    line-height: 1.5;
+}

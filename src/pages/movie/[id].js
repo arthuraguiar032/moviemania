@@ -7,6 +7,8 @@ import Tabs from "@/components/layout/Tabs";
 import Tab from "@/components/layout/Tabs/Tab";
 import { truncate_decimal, truncate_date, format_currency } from "@/utils/movieFormatters";
 import TagButton from "@/components/ui/TagButton";
+import InfoRow from "@/components/ui/InfoRow";
+import TagList from "@/components/ui/TagList";
 
 const MoviePage = () => {
   const router = useRouter();
@@ -114,122 +116,88 @@ const MoviePage = () => {
         <div className={styles.bottomSide}>
           <Tabs>
             <Tab name={"MORE DETAILS"}>
-              <div className={styles.infoRow}>
-                <strong className={styles.infoLabel}>Runtime</strong>
-                <div className={styles.textList}>{details.runtime} min</div>
-              </div>
+              <InfoRow label={"Runtime"}>{details?.runtime}min</InfoRow>
 
-              <div className={styles.infoRow}>
-                <strong className={styles.infoLabel}>Status</strong>
-                <div className={styles.textList}>{details.status}</div>
-              </div>
+              <InfoRow label={"Status"}>{details?.status}</InfoRow>
 
-              <div className={styles.infoRow}>
-                <strong className={styles.infoLabel}>Countries</strong>
-                <div className={styles.textList}>
-                  {details?.production_countries.map((country, index) => (
-                    <span key={country.iso_3166_1}>
-                      {country.name}
-                      {index < details.production_countries.length - 1
-                        ? ", "
-                        : ""}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <InfoRow label={"Countries"}>
+                <TagList
+                  items={details.production_countries}
+                  getKey={(country) => country.iso_3166_1}
+                  getLabel={(country) => country.name}
+                  getPath={(country) => `/country/${country.iso_3166_1}`}
+                />
+              </InfoRow>
 
-              <div className={styles.infoRow}>
-                <strong className={styles.infoLabel}>Budget</strong>
-                <div className={styles.textList}>
-                  {format_currency(details.budget)}
-                </div>
-              </div>
+              <InfoRow label={"Budget"}>
+                {format_currency(details?.budget)}
+              </InfoRow>
 
-              <div className={styles.infoRow}>
-                <strong className={styles.infoLabel}>Revenue</strong>
-                <div className={styles.textList}>
-                  {format_currency(details.revenue)}
-                </div>
-              </div>
+              <InfoRow label={"Revenue"}>
+                {format_currency(details?.revenue)}
+              </InfoRow>
 
-              <div className={styles.infoRow}>
-                <strong className={styles.infoLabel}>Studios</strong>
-                <div className={styles.tagList}>
-                  {studios?.map((studio) => (
-                    <TagButton label={studio.name} path={`/studio/${studio.id}`} key={studio.id}/>
-                  ))}
-                </div>
-              </div>
+              <InfoRow label={"Studios"}>
+                <TagList
+                  items={studios}
+                  getLabel={(studio) => studio.name}
+                  getPath={(studio) => `/studio/${studio.id}`}
+                  getKey={(studio) => studio.id}
+                />
+              </InfoRow>
 
-              <div className={styles.infoRow}>
-                <strong className={styles.infoLabel}>Keywords</strong>
-                <div className={styles.tagList}>
-                  {
-                    tags?.map( (tag) => 
-                      (<TagButton path={`/keyword/${tag.id}`} label={tag.name} key={tag.id}/>) )
-                  }
-                </div>
-              </div>
+              <InfoRow label={"Keywords"}>
+                <TagList
+                  itens={tags}
+                  getLabel={(tag) => tag.name}
+                  getPath={(tag) => `/tag/${tag.id}`}
+                  getKey={(tag) => tag.id}
+                />
+              </InfoRow>
             </Tab>
 
             <Tab name={"CAST"}>
-              <div className={styles.tagList}>
-                {actors.map((actor) => (
-                  <TagButton
-                    key={`${actor.id}-${actor.character}`}
-                    label={actor.name}
-                    path={`/artist/${actor.id}`}
-                  />
-                ))}
-              </div>
+              <TagList
+                getKey={(actor) => `${actor.id}.${actor.character}`}
+                getLabel={(actor) => actor.name}
+                getPath={(actor) => `/artist/${actor.id}`}
+                items={actors}
+              />
             </Tab>
 
             <Tab name={"CREW"}>
               {/* crew prioritario — agrupado por label */}
               {priorityCrew?.map(({ label, people }) => (
-                <div className={styles.infoRow} key={label}>
-                  <strong className={styles.infoLabel}>{label}</strong>
-                  <div className={styles.tagList}>
-                    {people.map((person) => (
-                      <TagButton
-                        key={person.id}
-                        label={person.name}
-                        path={`/artist/${person.id}`}
-                      />
-                    ))}
-                  </div>
-                </div>
+                <InfoRow label={label} key={label}>
+                  <TagList
+                    getKey={(person) => person.id}
+                    getLabel={(person) => person.name}
+                    getPath={(person) => `/artist/${person.id}`}
+                    items={people}
+                  />
+                </InfoRow>
               ))}
 
               {/* crew restante — listado direto */}
               {Object.entries(remainingCrew).map(([department, people]) => (
-                <div className={styles.infoRow} key={department}>
-                  <strong className={styles.infoLabel}>
-                    {DEPARTMENT_LABELS[department] ?? department}
-                  </strong>
-                  <div className={styles.tagList}>
-                    {people.map((person) => (
-                      <TagButton
-                        key={person.credit_id}
-                        label={person.name}
-                        path={`/artist/${person.id}`}
-                      />
-                    ))}
-                  </div>
-                </div>
+                <InfoRow label={department} key={department}>
+                  <TagList
+                    getKey={(person) => person.id}
+                    getLabel={(person) => person.name}
+                    getPath={(person) => `/artist/${person.id}`}
+                    items={people}
+                  />
+                </InfoRow>
               ))}
             </Tab>
 
             <Tab name={"GENRES"}>
-              <div className={styles.tagList}>
-                {details?.genres.map((genre) => (
-                  <TagButton
-                    key={genre.id}
-                    label={genre.name}
-                    path={`/genres/${genre.name}`}
-                  />
-                ))}
-              </div>
+              <TagList
+                getKey={(genre) => genre.id}
+                getLabel={(genre) => genre.name}
+                getPath={(genre) => `/genre/${genre.id}`}
+                items={details?.genres}
+              />
             </Tab>
           </Tabs>
         </div>
