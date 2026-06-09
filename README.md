@@ -1,40 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🎬 MovieMania
 
-## Getting Started
+Aplicação web de descoberta de filmes, construída com **Next.js**, **React** e **CSS Modules**, consumindo a API do [TMDB](https://www.themoviedb.org/).
 
-First, run the development server:
+---
+
+## Tecnologias
+
+- [Next.js](https://nextjs.org/) — Pages Router
+- [React 19](https://react.dev/)
+- CSS Modules
+- [Axios](https://axios-http.com/) — requisições HTTP
+- [TMDB API](https://developer.themoviedb.org/docs) — dados de filmes
+
+---
+
+## Como rodar localmente
+
+**Pré-requisitos:** Node.js >= 20.9.0
 
 ```bash
+# Clone o repositório
+git clone https://github.com/arthuraguiar032/moviemania.git
+cd moviemania
+
+# Instale as dependências
+npm install
+
+# Configure as variáveis de ambiente
+cp .env.example .env.local
+# Edite o .env.local com suas credenciais do TMDB
+
+# Inicie o servidor de desenvolvimento
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Variáveis de ambiente
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+Crie um arquivo `.env.local` na raiz do projeto com:
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_TMDB_BASE_URL=https://api.themoviedb.org/3
+NEXT_PUBLIC_TMDB_API_KEY=sua_chave_aqui
+```
 
-## Learn More
+Para obter uma chave de API, crie uma conta em [themoviedb.org](https://www.themoviedb.org/) e acesse as configurações de API.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+## Estrutura do projeto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── components/
+│   ├── layout/        # Componentes estruturais
+│   └── ui/            # Componentes reutilizáveis
+├── pages/             # Rotas do Next.js
+├── service/           # Camada de comunicação com a API
+├── styles/            # Estilos globais
+└── utils/             # Funções utilitárias (formatadores, helpers de imagem)
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+```bash
+npm run dev      # Servidor de desenvolvimento
+npm run build    # Build de produção
+npm run start    # Servidor de produção
+npm run lint     # Lint do código
+```
+
+---
+
+## Autor
+
+Feito por [Arthur Aguiar](https://github.com/arthuraguiar032) como projeto de aprendizado em desenvolvimento frontend.
