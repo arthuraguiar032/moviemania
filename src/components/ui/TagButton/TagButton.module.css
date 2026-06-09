@@ -1,0 +1,18 @@
+.tag {
+    display: inline-block;
+    padding: 0.35em 0.85em;
+    border-radius: 4px;
+    border: 1px solid rgba(217, 217, 217, 0.25);
+    background-color: transparent;
+    color: var(--offwhite-color);
+    font-size: 0.85rem;
+    font-family: var(--font-primary);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.tag:hover {
+    border-color: var(--highlight-color);
+    color: var(--highlight-color);
+}
