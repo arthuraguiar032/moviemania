@@ -19,11 +19,9 @@ const MoviePage = () => {
   const str_directors = directors_names.join(", ");
   const rating = truncate_decimal(details.vote_average, 1);
 
-  const actors = credits.cast.map((actor) => (actor.name));
+  const actors = credits.cast;
 
-  const studios = details.production_companies.map( (studio) => {
-    return {'name': studio.name, 'id': studio.id}
-  });
+  const studios = details.production_companies;
 
   const CREW_PRIORITY = [
     { job: "Director", label: "Director" },
@@ -47,6 +45,8 @@ const MoviePage = () => {
     return { label, people };
   }).filter(({ people }) => people.length > 0);
 
+  const tags = [];
+
   const remainingCrew = credits.crew
     .filter((person) => !priority_jobs.includes(person.job))
     .reduce((groups, person) => {
@@ -55,6 +55,8 @@ const MoviePage = () => {
       groups[dept].push(person);
       return groups;
     }, {});
+
+
 
   return (
     <div className={styles.content}>
@@ -112,29 +114,72 @@ const MoviePage = () => {
         <div className={styles.bottomSide}>
           <Tabs>
             <Tab name={"MORE DETAILS"}>
-              <p>Runtime: {details.runtime} min</p>
-              <p>Status: {details.status}</p>
-              <p>
-                Countries:
-                {details?.production_countries.map((country) => (
-                  <span key={country.iso_3166_1}>{country.name}</span>
-                ))}
-              </p>
-              <p>Budget: {format_currency(details.budget)}</p>
-              <p>Revenue: {format_currency(details.revenue)}</p>
-              <p>
-                Studios:
-                {studios?.map((studio) => (
-                  <span key={studio.id}>{studio.name}</span>
-                ))}
-              </p>
-              <p>Keywords: </p>
+              <div className={styles.infoRow}>
+                <strong className={styles.infoLabel}>Runtime</strong>
+                <div className={styles.textList}>{details.runtime} min</div>
+              </div>
+
+              <div className={styles.infoRow}>
+                <strong className={styles.infoLabel}>Status</strong>
+                <div className={styles.textList}>{details.status}</div>
+              </div>
+
+              <div className={styles.infoRow}>
+                <strong className={styles.infoLabel}>Countries</strong>
+                <div className={styles.textList}>
+                  {details?.production_countries.map((country, index) => (
+                    <span key={country.iso_3166_1}>
+                      {country.name}
+                      {index < details.production_countries.length - 1
+                        ? ", "
+                        : ""}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.infoRow}>
+                <strong className={styles.infoLabel}>Budget</strong>
+                <div className={styles.textList}>
+                  {format_currency(details.budget)}
+                </div>
+              </div>
+
+              <div className={styles.infoRow}>
+                <strong className={styles.infoLabel}>Revenue</strong>
+                <div className={styles.textList}>
+                  {format_currency(details.revenue)}
+                </div>
+              </div>
+
+              <div className={styles.infoRow}>
+                <strong className={styles.infoLabel}>Studios</strong>
+                <div className={styles.tagList}>
+                  {studios?.map((studio) => (
+                    <TagButton label={studio.name} path={`/studio/${studio.id}`} key={studio.id}/>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.infoRow}>
+                <strong className={styles.infoLabel}>Keywords</strong>
+                <div className={styles.tagList}>
+                  {
+                    tags?.map( (tag) => 
+                      (<TagButton path={`/keyword/${tag.id}`} label={tag.name} key={tag.id}/>) )
+                  }
+                </div>
+              </div>
             </Tab>
 
             <Tab name={"CAST"}>
-              <div className={styles.castList}>
-                {actors.map((actor, index) => (
-                  <TagButton key={index} label={actor} path={'/'}/>
+              <div className={styles.tagList}>
+                {actors.map((actor) => (
+                  <TagButton
+                    key={`${actor.id}-${actor.character}`}
+                    label={actor.name}
+                    path={`/artist/${actor.id}`}
+                  />
                 ))}
               </div>
             </Tab>
@@ -142,11 +187,15 @@ const MoviePage = () => {
             <Tab name={"CREW"}>
               {/* crew prioritario — agrupado por label */}
               {priorityCrew?.map(({ label, people }) => (
-                <div key={label}>
-                  <strong>{label}</strong>
-                  <div>
+                <div className={styles.infoRow} key={label}>
+                  <strong className={styles.infoLabel}>{label}</strong>
+                  <div className={styles.tagList}>
                     {people.map((person) => (
-                      <TagButton key={person.id} label={person.name} path={`/artist/${person.id}`} />
+                      <TagButton
+                        key={person.id}
+                        label={person.name}
+                        path={`/artist/${person.id}`}
+                      />
                     ))}
                   </div>
                 </div>
@@ -154,11 +203,17 @@ const MoviePage = () => {
 
               {/* crew restante — listado direto */}
               {Object.entries(remainingCrew).map(([department, people]) => (
-                <div key={department}>
-                  <strong>{DEPARTMENT_LABELS[department] ?? department}</strong>
-                  <div>
+                <div className={styles.infoRow} key={department}>
+                  <strong className={styles.infoLabel}>
+                    {DEPARTMENT_LABELS[department] ?? department}
+                  </strong>
+                  <div className={styles.tagList}>
                     {people.map((person) => (
-                      <TagButton key={person.credit_id} label={person.name} path={`/artist/${person.id}`} />
+                      <TagButton
+                        key={person.credit_id}
+                        label={person.name}
+                        path={`/artist/${person.id}`}
+                      />
                     ))}
                   </div>
                 </div>
@@ -166,9 +221,15 @@ const MoviePage = () => {
             </Tab>
 
             <Tab name={"GENRES"}>
-              {details?.genres.map((genre) => (
-                <TagButton key={genre.id} label={genre.name} path={`/genres/${genre.name}`} />
-              ))}
+              <div className={styles.tagList}>
+                {details?.genres.map((genre) => (
+                  <TagButton
+                    key={genre.id}
+                    label={genre.name}
+                    path={`/genres/${genre.name}`}
+                  />
+                ))}
+              </div>
             </Tab>
           </Tabs>
         </div>
