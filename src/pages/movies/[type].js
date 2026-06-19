@@ -28,72 +28,76 @@ const PAGE_CONFIG = {
 const MOVIES_PER_PAGE = 40;
 
 const MoviesType = () => {
-    const router = useRouter();
-    const {type} = router.query;
-    const [movies, setMovies] = useState([]);
-    const [currentPage, setCurrentPage]= useState(1);
-    const [totalResults, setTotalResults] = useState(0);
+  const router = useRouter();
+  const { type } = router.query;
+  const [movies, setMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
 
-    // puxar filmes da api dependendo da rota e da pagina que vc esta
-    useEffect(() => {
-      if (!type) return;
+  // puxar filmes da api dependendo da rota e da pagina que vc esta
+  useEffect(() => {
+    if (!type) return;
 
-      const connectionApi = async () => {
-        try {
-          const [page1, page2] = await Promise.all([
-            PAGE_CONFIG[type].fetchFn({ page: currentPage }),
-            PAGE_CONFIG[type].fetchFn({ page: currentPage + 1}),
-          ]);
+    const connectionApi = async () => {
+      try {
+        const apiPage1 = (currentPage - 1) * 2 + 1;
+        const apiPage2 = apiPage1 + 1;
 
-          console.log(page1, page2);
+        const [page1, page2] = await Promise.all([
+          PAGE_CONFIG[type].fetchFn({ page: apiPage1 }),
+          PAGE_CONFIG[type].fetchFn({ page: apiPage2 }),
+        ]);
 
-          setTotalResults(page1.total_results);
-          setMovies([...page1.results, ...page2.results]);
+        const secondPageResults = page2?.results || [];
+        const combined = [...page1.results, ...secondPageResults];
 
-        } catch (error) {
-          console.log("Erro ao acessar a API: ", error);
-        }
-      };
+        setTotalResults(page1.total_results);
+        setMovies(combined.slice(0, MOVIES_PER_PAGE));
 
-      connectionApi();
-    }, [currentPage, type]);
+      } catch (error) {
+        console.log("Erro ao acessar a API: ", error);
+      }
+    };
 
-    // TODO: tornar essa atualização algo idiomatico em react, ES6 Lint esta reclamando
-    //alterar pagina inicial ao mudar de rota e nao ficar preso na msm pagina
-    useEffect(() => {
-      if (!type) return;
+    connectionApi();
+  }, [currentPage, type]);
 
-      setCurrentPage(1);
-    }, [type]);
+  // TODO: tornar essa atualização algo idiomatico em react, ES6 Lint esta reclamando
+  //alterar pagina inicial ao mudar de rota e nao ficar preso na msm pagina
+  useEffect(() => {
+    if (!type) return;
 
-    if (type && !PAGE_CONFIG[type]) {
-      router.push("/404");
-      return null;
-    }
+    setCurrentPage(1);
+  }, [type]);
+
+  if (type && !PAGE_CONFIG[type]) {
+    router.push("/404");
+    return null;
+  }
 
 
-    return (
-      <div className={styles.resultsContainer}>
-        <div className={styles.heading}>
-          {PAGE_CONFIG[type] &&<h1> {PAGE_CONFIG[type].title}</h1>}
-          <hr />
-        </div>
+  return (
+    <div className={styles.resultsContainer}>
+      <div className={styles.heading}>
+        {PAGE_CONFIG[type] && <h1> {PAGE_CONFIG[type].title}</h1>}
+        <hr />
+      </div>
 
-        <MovieGrid movies={movies}/>
+      <MovieGrid movies={movies} />
 
-        <div className={styles.pages}>
-          <hr />
-          {movies?.length > 0 &&
-            
-            <Pagination
+      <div className={styles.pages}>
+        <hr />
+        {movies?.length > 0 &&
+
+          <Pagination
             totalPosts={totalResults}
             postsPerPage={MOVIES_PER_PAGE}
             setPage={setCurrentPage}
             currentPage={currentPage}
           />}
-        </div>
       </div>
-    );
+    </div>
+  );
 
 };
 
