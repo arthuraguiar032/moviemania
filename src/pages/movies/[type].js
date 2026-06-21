@@ -1,4 +1,4 @@
-import { movieListsService } from "@/service/tmdb_movieLists";
+import { movieListsService } from "@/service";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from '@/styles/Movies.module.css';
