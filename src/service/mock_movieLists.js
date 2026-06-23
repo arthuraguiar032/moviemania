@@ -1,10 +1,8 @@
-// Simula as respostas da API do TMDB usando arquivos JSON locais.
-// Evita consumo de cota do TMDB.
-
 import popularMovies  from "@/mock/popular_movies.json";
 import upcomingMovies from "@/mock/upcoming_movies.json";
 import nowPlaying     from "@/mock/now_playing_movies.json";
 import topRated       from "@/mock/top_rated_movies.json";
+import { ITEMS_PER_PAGE } from ".";
 
 const MOCK_DATA = {
   popular:     popularMovies,
@@ -16,14 +14,14 @@ const MOCK_DATA = {
 // Replica a assinatura de movieListRequest: recebe endpoint e params como objeto estruturado
 const mockListRequest = (type, params = {}) => {
   const data = MOCK_DATA[type];
-  const { page = 1, perPage = 20 } = params;
+  const { page = 1 } = params;
 
   if (!data) {
     return Promise.reject(new Error(`[MOCK] Tipo desconhecido: "${type}"`));
   }
 
-  const start   = (page - 1) * perPage;
-  const results = data.results.slice(start, start + perPage);
+  const start   = (page - 1) * ITEMS_PER_PAGE;
+  const results = data.results.slice(start, start + ITEMS_PER_PAGE);
 
   return Promise.resolve({
     page,
