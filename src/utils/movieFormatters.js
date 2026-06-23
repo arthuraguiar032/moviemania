@@ -20,3 +20,22 @@ export const format_currency = (value, locale) => {
     currency: currency,
   }).format(value);
 };
+
+export const buildCrewData = (crew, CREW_PRIORITY) => {
+  const priority_jobs = CREW_PRIORITY.map((item) => item.job);
+
+  const priorityCrew = CREW_PRIORITY.map(({ job, label }) => {
+    const people = crew?.filter((person) => person.job === job);
+    return { label, people };
+  }).filter(({ people }) => people?.length > 0);
+
+  const remainingCrew = crew?.filter((person) => !priority_jobs.includes(person.job))
+    .reduce((groups, person) => {
+      const dept = person.department;
+      if (!groups[dept]) groups[dept] = [];
+      groups[dept].push(person);
+      return groups;
+    }, {});
+
+  return [priorityCrew, remainingCrew];
+};

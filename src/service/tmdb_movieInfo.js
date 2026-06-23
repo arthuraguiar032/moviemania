@@ -1,4 +1,4 @@
-import axiosInstance, { DEFAULT_PARAMS } from "./axios";
+import {axiosInstance, DEFAULT_PARAMS } from "./axios";
 
 const movieInfoRequest = async (endpoint, customParams, movie_id) => {
     const config = {
