@@ -1,6 +1,6 @@
 import { movieListsService } from "@/service/tmdb_movieLists";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from '@/styles/Movies.module.css';
 import Pagination from "@/components/layout/Pagination";
 import MovieGrid from "@/components/layout/MovieGrid";
@@ -30,45 +30,59 @@ const MOVIES_PER_PAGE = 40;
 const MoviesType = () => {
   const router = useRouter();
   const { type } = router.query;
-  const [movies, setMovies] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
 
-  // puxar filmes da api dependendo da rota e da pagina que vc esta
+  const [currentPage, setCurrentPage] = useState(1);
+  const [movies, setMovies] = useState([]);
+  const moviesCacheRef = useRef([]);
+  const apiPageRef = useRef(1);
+
+  useEffect(() => {
+    moviesCacheRef.current = [];
+    apiPageRef.current = 1;
+    setMovies([]);
+    setCurrentPage(1);
+    setTotalResults(0);
+  }, [type]);
+
   useEffect(() => {
     if (!type) return;
 
-    const connectionApi = async () => {
-      try {
-        const apiPage1 = (currentPage - 1) * 2 + 1;
-        const apiPage2 = apiPage1 + 1;
+    const loadMoreMovies = async () => {
+      const start = (currentPage - 1) * MOVIES_PER_PAGE;
+      const end = start + MOVIES_PER_PAGE;
 
-        const [page1, page2] = await Promise.all([
-          PAGE_CONFIG[type].fetchFn({ page: apiPage1 }),
-          PAGE_CONFIG[type].fetchFn({ page: apiPage2 }),
-        ]);
+      while (moviesCacheRef.current.length < end) {
+        const response = await PAGE_CONFIG[type].fetchFn({
+          page: apiPageRef.current
+        });
 
-        const secondPageResults = page2?.results || [];
-        const combined = [...page1.results, ...secondPageResults];
+        if (!response.results?.length) break;
 
-        setTotalResults(page1.total_results);
-        setMovies(combined.slice(0, MOVIES_PER_PAGE));
+        if (apiPageRef.current === 1) {
+          setTotalResults(response.total_results);
+        }
 
-      } catch (error) {
-        console.log("Erro ao acessar a API: ", error);
+        const merged = [
+          ...moviesCacheRef.current,
+          ...response.results
+        ];
+
+        moviesCacheRef.current = Array.from(
+          new Map(
+            merged.map(movie => [movie.id, movie])
+          ).values()
+        );
+
+        apiPageRef.current++;
       }
+
+      setMovies(moviesCacheRef.current.slice(start, end));
     };
 
-    connectionApi();
+    loadMoreMovies();
+
   }, [currentPage, type]);
-
-  // TODO: tornar essa atualização algo idiomatico em react, ES6 Lint esta reclamando
-  //alterar pagina inicial ao mudar de rota e nao ficar preso na msm pagina
-  useEffect(() => {
-    if (!type) return;
-
-    setCurrentPage(1);
-  }, [type]);
 
   if (type && !PAGE_CONFIG[type]) {
     router.push("/404");
