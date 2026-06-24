@@ -1,12 +1,4 @@
-import axiosInstance from "./axios";
-
-// TODO: VIRAR CONTEXT DO PROJETO, USUARIO ESCOLHER REGIAO E LINGUA
-const DEFAULT_PARAMS = {
-  language: "en-US",
-  region: "US",
-  page: 1,
-};
-
+import {DEFAULT_PARAMS, axiosInstance} from "./axios";
 
 const searchRequest = async (endpoint, customParams) => {
     const config = {

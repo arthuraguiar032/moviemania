@@ -1,6 +1,7 @@
 import styles from './Carousel.module.css';
 import TmdbImage from '@/components/ui/TmdbImage';
 import cn from 'classnames';
+import Link from 'next/link';
 import { useRef } from 'react';
 
 const Carousel = ({title, listLink, movies}) => {
@@ -23,7 +24,9 @@ const Carousel = ({title, listLink, movies}) => {
     <div className={styles.containerCarousel}>
       <div className={styles.heading}>
         <h3>{title}</h3>
-        <span>Ver mais</span>
+        <Link href={listLink}>
+          <span>Ver mais</span>
+        </Link>
       </div>
       <hr />
 

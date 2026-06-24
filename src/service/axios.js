@@ -1,10 +1,16 @@
 import axios from "axios";
 
+// TODO: VIRAR CONTEXT DO PROJETO, USUARIO ESCOLHER REGIAO E LINGUA
+export const DEFAULT_PARAMS = {
+  language: "en-US",
+  region: "US",
+  page: 1,
+};
 
 const TMDB_BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL;
 const TMDB_API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
     baseURL: TMDB_BASE_URL,
     headers: {
         'accept': 'application/json'
@@ -20,5 +26,3 @@ axiosInstance.interceptors.request.use(config => {
 
     return config;
 });
-
-export default axiosInstance;

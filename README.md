@@ -77,6 +77,19 @@ npm run lint     # Lint do código
 
 ---
 
+
+## Desenvolvimento
+
+Rodar usando API do TMDB:
+
+npm run dev
+
+Rodar usando mocks locais:
+
+npm run dev:mock
+
+---
+
 ## Autor
 
 Feito por [Arthur Aguiar](https://github.com/arthuraguiar032) como projeto de aprendizado em desenvolvimento frontend.
